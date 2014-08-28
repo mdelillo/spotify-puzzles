@@ -4,6 +4,9 @@ public class ReverseBinary {
     private final int number;
 
     public ReverseBinary(int number) {
+        if (number < 1 || number > 1000000000) {
+            throw new IllegalArgumentException("Number must be between 1 and 1000000000");
+        }
         this.number = number;
     }
 

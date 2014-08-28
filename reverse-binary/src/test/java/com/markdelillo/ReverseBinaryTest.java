@@ -1,11 +1,17 @@
 package com.markdelillo;
 
 import com.google.common.collect.ImmutableMap;
-import junit.framework.TestCase;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Map;
 
-public class ReverseBinaryTest extends TestCase {
+import static junit.framework.Assert.assertEquals;
+
+public class ReverseBinaryTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     public static final Map<Integer, String> DECIMAL_TO_BINARY_CONVERSIONS = ImmutableMap.<Integer, String>builder()
             .put(1, "1")
@@ -16,24 +22,42 @@ public class ReverseBinaryTest extends TestCase {
             .put(1000000000, "111011100110101100101000000000")
             .build();
 
+    @Test
+    public void testNumberMustBeGreaterThanOrEqualToOne() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Number must be between 1 and 1000000000");
+        new ReverseBinary(0);
+    }
+
+    @Test
+    public void testNumberMustBeLessOrEqualToThan1000000000() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Number must be between 1 and 1000000000");
+        new ReverseBinary(1000000001);
+    }
+
+    @Test
     public void testGetOriginalNumber() {
         int number = 6;
         ReverseBinary reverseBinary = new ReverseBinary(number);
         assertEquals(number, reverseBinary.getNumber());
     }
 
+    @Test
     public void testConvertDecimalToBinaryString() {
         for (Map.Entry<Integer, String> entry : DECIMAL_TO_BINARY_CONVERSIONS.entrySet()) {
             assertEquals(getBinaryFromEntry(entry), ReverseBinary.decimalToBinaryString(getDecimalFromEntry(entry)));
         }
     }
 
+    @Test
     public void testConvertBinaryStringToDecimal() {
         for (Map.Entry<Integer, String> entry : DECIMAL_TO_BINARY_CONVERSIONS.entrySet()) {
             assertEquals(getDecimalFromEntry(entry), ReverseBinary.binaryStringToDecimal(getBinaryFromEntry(entry)));
         }
     }
 
+    @Test
     public void testGetReversedNumber() {
         Map<Integer, Integer> reversedNumbers = ImmutableMap.<Integer, Integer>builder()
                 .put(1, 1)
