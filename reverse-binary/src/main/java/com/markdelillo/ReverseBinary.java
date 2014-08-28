@@ -11,13 +11,17 @@ public class ReverseBinary {
         return number;
     }
 
+    public int getReversedNumber() {
+        StringBuilder binary = new StringBuilder(decimalToBinaryString(number));
+        return binaryStringToDecimal(binary.reverse().toString());
+    }
+
     public static String decimalToBinaryString(int number) {
         String binary = "";
-        while (number / 2 > 0) {
+        while (number > 0) {
             binary = (number % 2) + binary;
             number /= 2;
         }
-        binary = number + binary;
         return binary;
     }
 
