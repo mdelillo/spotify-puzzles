@@ -11,13 +11,26 @@ public class ReverseBinary {
         return number;
     }
 
-    public String toBinaryString() {
-        int tempNumber = number;
+    public static String decimalToBinaryString(int number) {
         String binary = "";
-        while (tempNumber > 0) {
-            binary = (tempNumber % 2) + binary;
-            tempNumber /= 2;
+        while (number / 2 > 0) {
+            binary = (number % 2) + binary;
+            number /= 2;
         }
+        binary = number + binary;
         return binary;
+    }
+
+    public static int binaryStringToDecimal(String binary) {
+        int position = 0;
+        int decimal = 0;
+        while (!binary.isEmpty()) {
+            if (binary.endsWith("1")) {
+                decimal += Math.pow(2, position);
+            }
+            position++;
+            binary = binary.substring(0, binary.length() - 1);
+        }
+        return decimal;
     }
 }

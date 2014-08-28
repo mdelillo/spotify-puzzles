@@ -7,6 +7,15 @@ import java.util.Map;
 
 public class ReverseBinaryTest extends TestCase {
 
+    public static final Map<Integer, String> DECIMAL_TO_BINARY_CONVERSIONS = ImmutableMap.<Integer, String>builder()
+            .put(0, "0")
+            .put(1, "1")
+            .put(10, "1010")
+            .put(32, "100000")
+            .put(42, "101010")
+            .put(63, "111111")
+            .build();
+
     public void testGetOriginalNumber() {
         int number = 6;
         ReverseBinary reverseBinary = new ReverseBinary(number);
@@ -14,19 +23,22 @@ public class ReverseBinaryTest extends TestCase {
     }
 
     public void testConvertDecimalToBinaryString() {
-        Map<Integer, String> decimalToBinaryConversions = ImmutableMap.of(
-                7, "111",
-                10, "1010",
-                20, "10100",
-                32, "100000"
-        );
-
-        for (Map.Entry<Integer, String> entry : decimalToBinaryConversions.entrySet()) {
-            assertEquals(entry.getValue(), convertToBinary(entry.getKey()));
+        for (Map.Entry<Integer, String> entry : DECIMAL_TO_BINARY_CONVERSIONS.entrySet()) {
+            assertEquals(getBinaryFromEntry(entry), ReverseBinary.decimalToBinaryString(getDecimalFromEntry(entry)));
         }
     }
 
-    private String convertToBinary(int number) {
-        return new ReverseBinary(number).toBinaryString();
+    public void testConvertBinaryStringToDecimal() {
+        for (Map.Entry<Integer, String> entry : DECIMAL_TO_BINARY_CONVERSIONS.entrySet()) {
+            assertEquals(getDecimalFromEntry(entry), ReverseBinary.binaryStringToDecimal(getBinaryFromEntry(entry)));
+        }
+    }
+
+    private String getBinaryFromEntry(Map.Entry<Integer, String> entry) {
+        return entry.getValue();
+    }
+
+    private int getDecimalFromEntry(Map.Entry<Integer, String> entry) {
+        return entry.getKey();
     }
 }
