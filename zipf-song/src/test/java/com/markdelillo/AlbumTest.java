@@ -27,19 +27,6 @@ public class AlbumTest {
     }
 
     @Test
-    public void testRetrieveTopNTracksFromAlbum() {
-        List<Track> expectedTracks = Arrays.asList(
-                new Track("alpha"),
-                new Track("bravo"),
-                new Track("charlie")
-        );
-
-        List<Track> actualTracks = album.getTopTracks(3);
-
-        assertThat(actualTracks, equalTo(expectedTracks));
-    }
-
-    @Test
     public void testRetrieveFirstNTrackTitlesFromAlbum() {
         List<String> expectedTracks = Arrays.asList("alpha", "bravo", "charlie");
 
@@ -60,9 +47,11 @@ public class AlbumTest {
     }
 
     @Test
-    public void testGetTracksByTrack() {
+    public void testGetTracksByNumber() {
         for (int i = 0; i < tracks.size(); i++) {
-            assertThat(album.getTrack(i + 1), equalTo(tracks.get(i)));
+            Track track = album.getTrack(i + 1);
+            assertThat(track, equalTo(tracks.get(i)));
+            assertThat(track.getTrackNumber(), equalTo(i + 1));
         }
     }
 

@@ -1,17 +1,21 @@
 package com.markdelillo;
 
 public class Track {
-    private final String title;
-    private final int playCount;
+    private String title;
+    private int playCount;
+
+    private int trackNumber;
 
     public Track(String title) {
         this.title = title;
         this.playCount = 0;
+        this.trackNumber = 1;
     }
 
     public Track(String title, int playCount) {
         this.title = title;
         this.playCount = playCount;
+        this.trackNumber = 1;
     }
 
     public String getTitle() {
@@ -22,6 +26,14 @@ public class Track {
         return playCount;
     }
 
+    public int getTrackNumber() {
+        return trackNumber;
+    }
+
+    public void setTrackNumber(int trackNumber) {
+        this.trackNumber = trackNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,13 +41,13 @@ public class Track {
 
         Track track = (Track) o;
 
-        return !(getTitle() != null ? !getTitle().equals(track.getTitle()) : track.getTitle() != null);
-
+        return getTrackNumber() == track.getTrackNumber() && !(getTitle() != null ? !getTitle().equals(track.getTitle()) : track.getTitle() != null);
     }
 
     @Override
     public int hashCode() {
-        return getTitle() != null ? getTitle().hashCode() : 0;
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + trackNumber;
+        return result;
     }
-
 }
