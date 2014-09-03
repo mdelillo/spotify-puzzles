@@ -25,4 +25,16 @@ public class Album {
     public List<Song> getTopSongs(int numSongs) {
         return songs.subList(0, numSongs);
     }
+
+    public List<String> getTopSongTitles(int numSongTitles) {
+        List<String> songTitles = new ArrayList<String>();
+        for (Song song : getTopSongs(numSongTitles)) {
+            songTitles.add(song.getTitle());
+        }
+        return songTitles;
+    }
+
+    public Song getTrack(int track) {
+        return songs.get(track - 1);
+    }
 }
