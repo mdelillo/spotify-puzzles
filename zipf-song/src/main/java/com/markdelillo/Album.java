@@ -1,15 +1,28 @@
 package com.markdelillo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Album {
-    private final String[] songs;
+    private final List<String> songs;
 
-    public Album(String[] songs) {
+    public Album() {
+        songs = new ArrayList<String>();
+    }
+
+    public Album(List<String> songs) {
         this.songs = songs;
     }
 
-    public String[] getTopSongs(int numSongs) {
-        return Arrays.copyOfRange(songs, 0, numSongs);
+    public void addSong(String song) {
+        songs.add(song);
+    }
+
+    public List<String> getSongs() {
+        return songs;
+    }
+
+    public List<String> getTopSongs(int numSongs) {
+        return songs.subList(0, numSongs);
     }
 }
