@@ -11,59 +11,63 @@ import static org.junit.Assert.assertThat;
 
 public class AlbumTest {
 
-    public List<Song> songs;
+    public List<Track> tracks;
     public Album album;
 
     @Before
     public void setup() {
-        songs = Arrays.asList(
-                new Song("alpha"),
-                new Song("bravo"),
-                new Song("charlie"),
-                new Song("delta"),
-                new Song("echo")
+        tracks = Arrays.asList(
+                new Track("alpha", 3),
+                new Track("bravo", 7),
+                new Track("charlie", 4),
+                new Track("delta", 10),
+                new Track("echo", 7)
         );
-        album = new Album(songs);
+        album = new Album(tracks);
     }
 
     @Test
-    public void testRetrieveFirstNSongsFromAlbum() {
-        List<Song> expectedSongs = Arrays.asList(
-                new Song("alpha"),
-                new Song("bravo"),
-                new Song("charlie")
+    public void testRetrieveTopNTracksFromAlbum() {
+        List<Track> expectedTracks = Arrays.asList(
+                new Track("alpha"),
+                new Track("bravo"),
+                new Track("charlie")
         );
 
-        List<Song> actualSongs = album.getTopSongs(3);
+        List<Track> actualTracks = album.getTopTracks(3);
 
-        assertThat(actualSongs, equalTo(expectedSongs));
+        assertThat(actualTracks, equalTo(expectedTracks));
     }
 
     @Test
-    public void testRetrieveFirstNSongTitlesFromAlbum() {
-        List<String> expectedSongs = Arrays.asList("alpha", "bravo", "charlie");
+    public void testRetrieveFirstNTrackTitlesFromAlbum() {
+        List<String> expectedTracks = Arrays.asList("alpha", "bravo", "charlie");
 
-        List<String> actualSongs = album.getTopSongTitles(3);
+        List<String> actualTracks = album.getTopTrackTitles(3);
 
-        assertThat(actualSongs, equalTo(expectedSongs));
+        assertThat(actualTracks, equalTo(expectedTracks));
     }
 
     @Test
-    public void testAddSongsToAlbum() {
+    public void testAddTracksToAlbum() {
         album = new Album();
 
-        for (Song song : songs) {
-            album.addSong(song);
+        for (Track track : tracks) {
+            album.addTrack(track);
         }
 
-        assertThat(album.getSongs(), equalTo(songs));
+        assertThat(album.getTracks(), equalTo(tracks));
     }
 
     @Test
-    public void testGetSongsByTrack() {
-        for (int i = 0; i < songs.size(); i++) {
-            assertThat(album.getTrack(i + 1), equalTo(songs.get(i)));
+    public void testGetTracksByTrack() {
+        for (int i = 0; i < tracks.size(); i++) {
+            assertThat(album.getTrack(i + 1), equalTo(tracks.get(i)));
         }
     }
 
+    @Test
+    public void testGetTrackCount() {
+        assertThat(album.trackCount(), equalTo(5));
+    }
 }

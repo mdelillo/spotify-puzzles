@@ -4,37 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Album {
-    private final List<Song> songs;
+    private final List<Track> tracks;
 
     public Album() {
-        songs = new ArrayList<Song>();
+        tracks = new ArrayList<Track>();
     }
 
-    public Album(List<Song> songs) {
-        this.songs = songs;
+    public Album(List<Track> tracks) {
+        this.tracks = tracks;
     }
 
-    public void addSong(Song song) {
-        songs.add(song);
+    public void addTrack(Track track) {
+        tracks.add(track);
     }
 
-    public List<Song> getSongs() {
-        return songs;
+    public List<Track> getTracks() {
+        return tracks;
     }
 
-    public List<Song> getTopSongs(int numSongs) {
-        return songs.subList(0, numSongs);
+    public List<Track> getTopTracks(int numTracks) {
+        return tracks.subList(0, numTracks);
     }
 
-    public List<String> getTopSongTitles(int numSongTitles) {
-        List<String> songTitles = new ArrayList<String>();
-        for (Song song : getTopSongs(numSongTitles)) {
-            songTitles.add(song.getTitle());
+    public List<String> getTopTrackTitles(int numTrackTitles) {
+        List<String> trackTitles = new ArrayList<String>();
+        for (Track track : getTopTracks(numTrackTitles)) {
+            trackTitles.add(track.getTitle());
         }
-        return songTitles;
+        return trackTitles;
     }
 
-    public Song getTrack(int track) {
-        return songs.get(track - 1);
+    public Track getTrack(int track) {
+        return tracks.get(track - 1);
+    }
+
+    public int trackCount() {
+        return tracks.size();
     }
 }
