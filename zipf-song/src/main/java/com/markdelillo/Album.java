@@ -1,20 +1,19 @@
 package com.markdelillo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Album {
     private final List<Track> tracks;
-    private int nextTrackNumber;
+    private int nextTrackNumber = 1;
 
     public Album() {
         tracks = new ArrayList<Track>();
-        nextTrackNumber = 1;
     }
 
     public Album(List<Track> tracks) {
         this.tracks = tracks;
-        nextTrackNumber = 1;
         for (Track track : this.tracks) {
             track.setTrackNumber(nextTrackNumber++);
         }
@@ -29,19 +28,22 @@ public class Album {
         return tracks;
     }
 
-    public List<String> getTopTrackTitles(int numTrackTitles) {
-        List<String> trackTitles = new ArrayList<String>();
-        for (Track track : tracks.subList(0, numTrackTitles)) {
-            trackTitles.add(track.getTitle());
-        }
-        return trackTitles;
-    }
-
     public Track getTrack(int track) {
         return tracks.get(track - 1);
     }
 
     public int trackCount() {
         return tracks.size();
+    }
+
+    public List<String> getTopTrackTitles(int numTrackTitles) {
+        List<Track> sortedTracks = new ArrayList<Track>(tracks);
+        Collections.sort(sortedTracks, Collections.reverseOrder());
+
+        List<String> trackTitles = new ArrayList<String>();
+        for (Track track : sortedTracks.subList(0, numTrackTitles)) {
+            trackTitles.add(track.getTitle());
+        }
+        return trackTitles;
     }
 }

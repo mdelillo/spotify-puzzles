@@ -1,21 +1,20 @@
 package com.markdelillo;
 
-public class Track {
+public class Track implements Comparable {
     private String title;
     private int playCount;
-
     private int trackNumber;
-
-    public Track(String title) {
-        this.title = title;
-        this.playCount = 0;
-        this.trackNumber = 1;
-    }
 
     public Track(String title, int playCount) {
         this.title = title;
         this.playCount = playCount;
         this.trackNumber = 1;
+    }
+
+    public Track(String title, int playCount, int trackNumber) {
+        this.title = title;
+        this.playCount = playCount;
+        this.trackNumber = trackNumber;
     }
 
     public String getTitle() {
@@ -32,6 +31,20 @@ public class Track {
 
     public void setTrackNumber(int trackNumber) {
         this.trackNumber = trackNumber;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Track otherTrack = (Track)o;
+        int quality = getTrackNumber() * getPlayCount();
+        int otherQuality = otherTrack.getTrackNumber() * otherTrack.getPlayCount();
+
+        if (quality != otherQuality) {
+            return quality - otherQuality;
+        }
+        else {
+            return otherTrack.getTrackNumber() - getTrackNumber();
+        }
     }
 
     @Override
