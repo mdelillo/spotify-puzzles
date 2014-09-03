@@ -39,7 +39,7 @@ public class MainTest {
         String expectedOutput = getResourceFileAsString("expected_output_1");
         sendToStdin(input);
 
-        Main.main(new String[] {input});
+        Main.main(new String[]{input});
 
         assertThat(capturedStdout.toString().trim(), equalTo(expectedOutput));
     }
@@ -50,7 +50,7 @@ public class MainTest {
         String expectedOutput = getResourceFileAsString("expected_output_2");
         sendToStdin(input);
 
-        Main.main(new String[] {input});
+        Main.main(new String[]{input});
 
         assertThat(capturedStdout.toString().trim(), equalTo(expectedOutput));
     }

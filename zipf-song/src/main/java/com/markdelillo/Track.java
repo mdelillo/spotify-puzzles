@@ -2,16 +2,16 @@ package com.markdelillo;
 
 public class Track implements Comparable {
     private String title;
-    private int playCount;
+    private double playCount;
     private int trackNumber;
 
-    public Track(String title, int playCount) {
+    public Track(String title, double playCount) {
         this.title = title;
         this.playCount = playCount;
         this.trackNumber = 1;
     }
 
-    public Track(String title, int playCount, int trackNumber) {
+    public Track(String title, double playCount, int trackNumber) {
         this.title = title;
         this.playCount = playCount;
         this.trackNumber = trackNumber;
@@ -21,7 +21,7 @@ public class Track implements Comparable {
         return title;
     }
 
-    public int getPlayCount() {
+    public double getPlayCount() {
         return playCount;
     }
 
@@ -35,14 +35,15 @@ public class Track implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        Track otherTrack = (Track)o;
-        int quality = getTrackNumber() * getPlayCount();
-        int otherQuality = otherTrack.getTrackNumber() * otherTrack.getPlayCount();
+        Track otherTrack = (Track) o;
+        double quality = getTrackNumber() * getPlayCount();
+        double otherQuality = otherTrack.getTrackNumber() * otherTrack.getPlayCount();
 
-        if (quality != otherQuality) {
-            return quality - otherQuality;
-        }
-        else {
+        if (quality > otherQuality) {
+            return 1;
+        } else if (quality < otherQuality) {
+            return -1;
+        } else {
             return otherTrack.getTrackNumber() - getTrackNumber();
         }
     }
