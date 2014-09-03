@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Album {
-    private final List<String> songs;
+    private final List<Song> songs;
 
     public Album() {
-        songs = new ArrayList<String>();
+        songs = new ArrayList<Song>();
     }
 
-    public Album(List<String> songs) {
+    public Album(List<Song> songs) {
         this.songs = songs;
     }
 
-    public void addSong(String song) {
+    public void addSong(Song song) {
         songs.add(song);
     }
 
-    public List<String> getSongs() {
+    public List<Song> getSongs() {
         return songs;
     }
 
-    public List<String> getTopSongs(int numSongs) {
+    public List<Song> getTopSongs(int numSongs) {
         return songs.subList(0, numSongs);
     }
 }
